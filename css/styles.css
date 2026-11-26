@@ -341,110 +341,113 @@ h2 {
   box-shadow: 0 8px 20px rgba(237, 28, 36, 0.18);
 }
 
+.filter {
+  border-radius: 999px;
+  transition: color 0.25s ease, background 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.filter:hover {
+  transform: translateY(-2px);
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 22px;
 }
 
 .project {
   position: relative;
-  min-height: 370px;
+  min-height: 340px;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #eef0f3;
+  isolation: isolate;
+  background: #17191d;
   cursor: pointer;
-  border: 1px solid #e5e8ec;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.45s ease;
 }
 
-.project:nth-child(1),
-.project:nth-child(4) {
-  grid-column: span 7;
+.project[hidden] {
+  display: none;
 }
 
-.project:nth-child(2),
-.project:nth-child(3) {
-  grid-column: span 5;
+.project:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 4px;
 }
 
-.art {
-  /* Las ilustraciones de muestra llenan cada tarjeta y amplían al pasar el cursor. */
+.project::before {
+  content: "";
   position: absolute;
   inset: 0;
-  transition: 0.55s ease;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(115deg, transparent 25%, rgba(255, 255, 255, 0.22) 48%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s ease;
 }
 
-.project:hover .art {
-  transform: scale(1.045);
+.project:hover::before {
+  transform: translateX(120%);
 }
 
-.art.catalogo {
-  background:
-    linear-gradient(120deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.55)),
-    url("../assets/trabajos/publicaciones/catalogo-corporativo.jpeg"),
-    repeating-linear-gradient(90deg, #d71d24 0 70px, #f4eee5 70px 140px);
-  background-size: cover, cover, auto;
-  background-position: center;
+.project-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), filter 0.5s ease;
 }
 
-.art.cuaderno {
-  background:
-    linear-gradient(120deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.4)),
-    url("../assets/trabajos/papeleria/cuadernos-personalizados.jpeg"),
-    radial-gradient(circle at 68% 42%, #e92b31 0 12%, transparent 12.3%),
-    linear-gradient(140deg, #1f1f1f 50%, #090909 50%);
-  background-size: cover, cover, auto, auto;
-  background-position: center;
+.project:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 55px rgba(15, 23, 42, 0.24);
 }
 
-.art.pack {
-  background:
-    linear-gradient(120deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.38)),
-    url("../assets/trabajos/promocional/material-promocional.jpeg"),
-    linear-gradient(135deg, #eee 0 33%, #d71920 33% 66%, #161616 66%);
-  background-size: cover, cover, auto;
-  background-position: center;
-}
-
-.art.editorial {
-  background:
-    linear-gradient(120deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42)),
-    url("../assets/trabajos/publicaciones/produccion-editoria.jpeg"),
-    repeating-radial-gradient(circle at 20% 50%, #ed1c24 0 12px, #111 13px 30px);
-  background-size: cover, cover, auto;
-  background-position: center;
+.project:hover .project-image {
+  transform: scale(1.09);
+  filter: saturate(1.12);
 }
 
 .project-info {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 70px 24px 24px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.92));
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
+  z-index: 2;
+  right: 18px;
+  bottom: 18px;
 }
 
-.project-info small {
-  color: #ddd;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
-
-.project-info h3 {
-  font-size: 24px;
-  margin: 7px 0 0;
-}
-
-.plus {
-  width: 44px;
-  height: 44px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+.view-icon {
   display: grid;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   place-items: center;
-  font-size: 23px;
+  color: #fff;
+  background: rgba(15, 17, 20, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-icon svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.project:hover .view-icon {
+  background: var(--red);
+  transform: scale(1.1);
+  box-shadow: 0 10px 26px rgba(237, 28, 36, 0.4);
 }
 
 /* Listado de productos sobre fondo claro para distinguir esta sección. */
@@ -741,15 +744,29 @@ footer {
 
 .modal-card {
   position: relative;
-  width: min(560px, 100%);
+  width: min(760px, 100%);
   background: #fff;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  padding: 32px 28px 26px;
+  padding: 24px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  transform: translateY(24px) scale(0.97);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.modal.open .modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.modal-image {
+  width: 100%;
+  max-height: min(58vh, 520px);
+  object-fit: contain;
+  margin-top: 20px;
+  background: #f1f2f4;
 }
 
 .modal-card h3 {
-  margin: 16px 0 12px;
+  margin: 18px 0 10px;
   font-size: clamp(28px, 4vw, 40px);
   line-height: 1.1;
   text-transform: uppercase;
@@ -814,10 +831,6 @@ footer {
     gap: 10px;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
   .clients-layout {
     align-items: flex-start;
     flex-direction: column;
@@ -828,17 +841,29 @@ footer {
     width: 100%;
     flex: none;
   }
+}
 
-  .project:nth-child(1),
-  .project:nth-child(2),
-  .project:nth-child(3),
-  .project:nth-child(4) {
-    grid-column: auto;
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .client-track {
-      animation: none;
-    }
+  .project {
+    min-height: 360px;
+  }
+
+  .modal-card {
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

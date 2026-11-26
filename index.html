@@ -124,88 +124,20 @@
             </div>
 
             <p class="section-copy">
-              Una muestra visual de categorías para presentar trabajos reales. Sustituye cada
-              composición por fotografías propias cuando quieras.
+              Una selección de nuestros proyectos de papelería, publicaciones y material
+              promocional, impresos con atención a cada detalle.
             </p>
           </div>
 
           <!-- Cada botón muestra los proyectos cuya categoría coincide con data-filter. -->
-          <div class="filters" aria-label="Filtros de proyectos">
-            <button class="filter active" type="button" data-filter="all">Todos</button>
-            <button class="filter" type="button" data-filter="corporativa">Papelería</button>
-            <button class="filter" type="button" data-filter="publicaciones">Publicaciones</button>
-            <button class="filter" type="button" data-filter="promocional">Promocional</button>
+          <div class="filters" role="group" aria-label="Filtrar proyectos">
+            <button class="filter active" type="button" data-filter="all" aria-pressed="true">Todos</button>
+            <button class="filter" type="button" data-filter="papeleria" aria-pressed="false">Papelería</button>
+            <button class="filter" type="button" data-filter="publicaciones" aria-pressed="false">Publicaciones</button>
+            <button class="filter" type="button" data-filter="promocional" aria-pressed="false">Promocional</button>
           </div>
 
-          <div class="grid">
-            <article
-              class="project reveal"
-              data-cat="publicaciones"
-              data-title="Catálogo corporativo"
-              data-desc="Producción editorial con una identidad visual sólida, control de color y terminaciones cuidadas."
-            >
-              <!-- Imagen: assets/trabajos/publicaciones/catalogo-corporativo.jpeg -->
-              <div class="art catalogo" aria-hidden="true"></div>
-              <div class="project-info">
-                <div>
-                  <small>Publicaciones</small>
-                  <h3>Catálogo corporativo</h3>
-                </div>
-                <div class="plus">+</div>
-              </div>
-            </article>
-
-            <article
-              class="project reveal"
-              data-cat="corporativa"
-              data-title="Cuadernos personalizados"
-              data-desc="Papelería corporativa diseñada para reforzar la presencia de marca en cada detalle."
-            >
-              <!-- Imagen: assets/trabajos/papeleria/cuadernos-personalizados.jpeg -->
-              <div class="art cuaderno" aria-hidden="true"></div>
-              <div class="project-info">
-                <div>
-                  <small>Papelería</small>
-                  <h3>Cuadernos personalizados</h3>
-                </div>
-                <div class="plus">+</div>
-              </div>
-            </article>
-
-            <article
-              class="project reveal"
-              data-cat="promocional"
-              data-title="Material promocional"
-              data-desc="Piezas impresas para campañas, puntos de venta, eventos y comunicación directa."
-            >
-              <!-- Imagen: assets/trabajos/promocional/material-promocional.jpeg -->
-              <div class="art pack" aria-hidden="true"></div>
-              <div class="project-info">
-                <div>
-                  <small>Promocional</small>
-                  <h3>Material promocional</h3>
-                </div>
-                <div class="plus">+</div>
-              </div>
-            </article>
-
-            <article
-              class="project reveal"
-              data-cat="publicaciones"
-              data-title="Producción editorial"
-              data-desc="Revistas, manuales, memorias corporativas y libros con procesos de revisión y control."
-            >
-              <!-- Imagen: assets/trabajos/publicaciones/produccion-editoria.jpeg -->
-              <div class="art editorial" aria-hidden="true"></div>
-              <div class="project-info">
-                <div>
-                  <small>Publicaciones</small>
-                  <h3>Producción editorial</h3>
-                </div>
-                <div class="plus">+</div>
-              </div>
-            </article>
-          </div>
+          <div class="grid" aria-live="polite" aria-label="Galería de trabajos"></div>
         </div>
       </section>
 
@@ -359,10 +291,11 @@
 
     <!-- Ventana que JavaScript completa con los datos del proyecto seleccionado. -->
     <div class="modal" aria-hidden="true">
-      <div class="modal-card">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <button class="close" type="button" aria-label="Cerrar">×</button>
         <div class="kicker">Proyecto destacado</div>
-        <h3></h3>
+        <img class="modal-image" alt="">
+        <h3 id="modal-title"></h3>
         <p></p>
       </div>
     </div>
